@@ -616,76 +616,7 @@ body {
     font-size: 0.8rem;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 600px) {
-    .app-container {
-        padding: 1rem 0.75rem;
-        gap: 1rem;
-    }
 
-    .header h1 {
-        font-size: 2rem;
-    }
-
-    .calculator-card {
-        padding: 1.5rem;
-        min-height: auto;
-    }
-
-    .calculator-header h2 {
-        font-size: 1.25rem;
-    }
-
-    .input-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-
-    .circle-display {
-        width: 160px;
-        height: 160px;
-    }
-
-    .result-value {
-        font-size: 2.75rem;
-    }
-
-    .info-hub {
-        margin-top: 2rem;
-        gap: 1.5rem;
-    }
-
-    .info-card {
-        padding: 1.5rem;
-    }
-
-    .faq-item {
-        padding: 1.25rem;
-    }
-
-    .form-actions {
-        flex-direction: column;
-    }
-
-    .calculate-btn, .reset-btn {
-        width: 100%;
-    }
-}
-
-@media (max-width: 400px) {
-    .tabs {
-        gap: 0.5rem;
-    }
-
-    .tab-item {
-        padding: 0.6rem 1rem;
-        font-size: 0.85rem;
-    }
-
-    .logo h1 {
-        font-size: 1.75rem;
-    }
-}
 /* New UI Elements */
 .radio-group {
     display: flex;
@@ -809,20 +740,73 @@ body {
     color: var(--text-muted);
 }
 
-.interpret-list li strong {
-    color: var(--secondary);
+/* Final Responsive Adjustments - Force Overrides */
+@media (max-width: 640px) {
+    .app-container {
+        padding: 1rem 0.75rem;
+        gap: 1rem;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .calculator-card {
+        padding: 1.5rem;
+        min-height: auto;
+        border-radius: 12px;
+    }
+
+    .input-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    .calculator-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .calculate-btn, .reset-btn {
+        width: 100%;
+        flex: none;
+    }
+
+    .circle-display {
+        width: 150px;
+        height: 150px;
+    }
+
+    .result-value {
+        font-size: 2.5rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-item {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
 }
 
-.radio-options label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    font-size: 1rem;
-    color: var(--text-muted);
-    font-weight: 500;
-}
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.8rem;
+    }
 
-.radio-options input[type="radio"]:checked + span {
-    color: var(--secondary);
+    .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .tabs {
+        gap: 0.4rem;
+    }
+
+    .tab-item {
+        padding: 0.5rem 0.8rem;
+    }
 }
