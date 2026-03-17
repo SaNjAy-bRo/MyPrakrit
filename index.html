@@ -14,7 +14,7 @@
     <!-- PDF Export Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
     <div class="background-blobs">
@@ -32,322 +32,146 @@
             <p class="subtitle">Your ultimate health companion</p>
         </header>
 
-        <nav class="tab-scroller">
-            <ul class="tabs" role="tablist">
-                <li class="tab-item active" data-tab="bmi" role="tab" aria-selected="true">BMI</li>
-                <li class="tab-item" data-tab="bmr" role="tab">BMR</li>
-                <li class="tab-item" data-tab="tdee" role="tab">TDEE</li>
-                <li class="tab-item" data-tab="ibw" role="tab">Ideal weight</li>
-                <li class="tab-item" data-tab="bfp" role="tab">Body Fat %</li>
-                <li class="tab-item" data-tab="whr" role="tab">WHR</li>
-            </ul>
-        </nav>
 
-        <section class="calculator-card glass">
+
+        <section class="calculator-card glass overflow-visible">
             <div id="calculator-content" class="fade-in">
-                <div class="user-profile-section">
-                    <div class="input-group">
-                        <label for="user-name">Full Name (for Report)</label>
-                        <input type="text" id="user-name" placeholder="Enter your name">
-                    </div>
-                </div>
-
-                <!-- Calculator forms will be dynamically injected or swapped here -->
-                <div id="tab-bmi" class="tab-content active">
-                    <div class="calculator-header">
-                        <h2>BMI Calculator</h2>
-                        <p>Body Mass Index is a simple calculation using a person's height and weight.</p>
-                    </div>
-                    
-                    <form id="bmi-form" class="calc-form">
-                        <div class="input-group">
-                            <label for="bmi-weight">Weight (kg)</label>
-                            <input type="number" id="bmi-weight" placeholder="e.g. 70" step="0.1" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="bmi-height">Height (cm)</label>
-                            <input type="number" id="bmi-height" placeholder="e.g. 175" step="0.1" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="calculate-btn">
-                                Calculate BMI
-                            </button>
-                            <button type="reset" class="reset-btn">Reset</button>
-                        </div>
-                    </form>
-
-                    <div id="bmi-result" class="result-container hidden">
-                        <div class="result-card">
-                            <span class="result-label">Your Body Mass Index</span>
-                            <div class="circle-display">
-                                <div class="circle-content">
-                                    <span class="result-value" id="bmi-value">--</span>
+                <form id="master-calculator-form" class="master-form">
+                    <!-- Section 1: Personal Details -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i data-lucide="user-circle"></i> Personal Intelligence</h3>
+                        <div class="input-grid-triple">
+                            <div class="input-group">
+                                <label for="user-name">Full Name</label>
+                                <input type="text" id="user-name" placeholder="Enter Full Name" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Gender Selection</label>
+                                <div class="premium-radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="gender" value="male" checked>
+                                        <span class="radio-custom">Male</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="gender" value="female">
+                                        <span class="radio-custom">Female</span>
+                                    </label>
                                 </div>
                             </div>
+                            <div class="input-group">
+                                <label for="age">Current Age</label>
+                                <input type="number" id="age" placeholder="Age" required>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="gauge-wrapper">
-                            <svg class="gauge" viewBox="0 0 200 120">
-                                <path class="gauge-bg" d="M20,100 A80,80 0 0,1 180,100" />
-                                <path id="bmi-gauge-fill" class="gauge-fill" d="M20,100 A80,80 0 0,1 20,100" />
-                                <line id="gauge-needle" x1="100" y1="100" x2="20" y2="100" class="needle" />
-                                <circle cx="100" cy="100" r="5" class="needle-center" />
-                                
-                                <text x="35" y="115" class="gauge-tick">18.5</text>
-                                <text x="100" y="25" class="gauge-tick">25.0</text>
-                                <text x="155" y="115" class="gauge-tick">30.0</text>
-                            </svg>
+                    <!-- Section 2: Precise Measurements -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i data-lucide="layers"></i> Body Composition</h3>
+                        <div class="input-grid-triple">
+                            <div class="input-group">
+                                <label for="weight">Weight (kg)</label>
+                                <input type="number" id="weight" placeholder="0.0" step="0.1" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="height">Height (cm)</label>
+                                <input type="number" id="height" placeholder="0.0" step="0.1" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="neck">Neck Size (cm)</label>
+                                <input type="number" id="neck" placeholder="0.0" step="0.1">
+                            </div>
+                            <div class="input-group">
+                                <label for="waist">Waist Line (cm)</label>
+                                <input type="number" id="waist" placeholder="0.0" step="0.1">
+                            </div>
+                            <div class="input-group">
+                                <label for="hip">Hip Width (cm)</label>
+                                <input type="number" id="hip" placeholder="0.0" step="0.1">
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="interpret-results">
-                            <h3>Interpret your results</h3>
-                            <ul class="interpret-list">
-                                <li><strong>Underweight:</strong> BMI &lt; 18.5 kg/m²</li>
-                                <li><strong>Normal weight:</strong> 18.5 ≤ BMI &lt; 25 kg/m²</li>
-                                <li><strong>Overweight:</strong> 25 ≤ BMI &lt; 30 kg/m²</li>
-                                <li><strong>Obesity:</strong> BMI ≥ 30 kg/m²</li>
-                            </ul>
+                    <!-- Section 3: Lifestyle & Goals -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i data-lucide="activity"></i> Metabolic Factors</h3>
+                        <div class="input-grid-triple">
+                            <div class="input-group">
+                                <label for="physical-activity">Activity Multiplier</label>
+                                <input type="number" id="physical-activity" value="1.2" step="0.01">
+                            </div>
+                            <div class="input-group">
+                                <label for="stress">Stress Index</label>
+                                <input type="number" id="stress" value="1.0" step="0.01">
+                            </div>
+                            <div class="input-group">
+                                <label for="modification">Calorie Delta</label>
+                                <input type="number" id="modification" value="0" step="10">
+                            </div>
                         </div>
-                        <button class="download-pdf-btn" data-type="BMI">
-                            <i data-lucide="download"></i>
-                            Download Detailed PDF Report
+                    </div>
+
+                    <div class="form-actions-master">
+                        <button type="submit" class="master-calculate-btn">
+                            <i data-lucide="sparkles"></i>
+                            Generate Health Profile
                         </button>
+                        <button type="reset" class="master-reset-btn">Clear Form</button>
                     </div>
-                    </div>
-                </div>
+                </form>
 
-                <!-- BMR Calculator -->
-                <div id="tab-bmr" class="tab-content">
-                    <div class="calculator-header">
-                        <h2>Basal Metabolic Rate (BMR)</h2>
-                        <p>BMR is the number of calories your body needs to function at rest.</p>
-                    </div>
-                    
-                    <form id="bmr-form" class="calc-form">
-                        <div class="radio-group">
-                            <label>Gender:</label>
-                            <div class="radio-options">
-                                <label><input type="radio" name="bmr-gender" value="male" checked> Male</label>
-                                <label><input type="radio" name="bmr-gender" value="female"> Female</label>
-                            </div>
-                        </div>
-                        <div class="input-grid">
-                            <div class="input-group">
-                                <label for="bmr-weight">Weight (kg)</label>
-                                <input type="number" id="bmr-weight" placeholder="e.g. 70" step="0.1" required>
-                            </div>
-                            <div class="input-group">
-                                <label for="bmr-height">Height (cm)</label>
-                                <input type="number" id="bmr-height" placeholder="e.g. 175" step="0.1" required>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label for="bmr-age">Age (years)</label>
-                            <input type="number" id="bmr-age" placeholder="e.g. 25" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="calculate-btn">
-                                Calculate BMR
-                            </button>
-                            <button type="reset" class="reset-btn">Reset</button>
-                        </div>
-                    </form>
-
-                    <div id="bmr-result" class="result-container hidden">
-                        <div class="result-card">
-                            <span class="result-label">Your Basal Metabolic Rate</span>
-                            <div class="circle-display">
-                                <div class="circle-content">
-                                    <span class="result-value" id="bmr-value">--</span>
-                                    <span class="unit">kcal/day</span>
+                <div id="master-results" class="results-dashboard hidden">
+                    <div id="capture-report-area">
+                        <div class="results-grid fade-in-up">
+                            <!-- Primary Metrics -->
+                            <div class="result-box primary-metric" style="animation-delay: 0.1s">
+                                <span class="box-label">BMI</span>
+                                <div class="gauge-small-wrapper">
+                                    <svg class="gauge-small" viewBox="0 0 100 60">
+                                        <path class="gauge-bg" d="M10,50 A40,40 0 0,1 90,50" />
+                                        <path id="master-bmi-gauge" class="gauge-fill" d="M10,50 A40,40 0 0,1 10,50" />
+                                    </svg>
+                                    <span class="box-value" id="res-bmi">--</span>
                                 </div>
+                                <span class="box-status" id="res-bmi-status">Normal</span>
                             </div>
-                        </div>
-                        <button class="download-pdf-btn" data-type="BMR">
-                            <i data-lucide="download"></i>
-                            Download Detailed PDF Report
-                        </button>
-                    </div>
-                </div>
 
-                <!-- TDEE Calculator -->
-                <div id="tab-tdee" class="tab-content">
-                    <div class="calculator-header">
-                        <h2>TDEE Calculator</h2>
-                        <p>Total Daily Energy Expenditure estimates how many calories you burn per day based on activity.</p>
-                    </div>
-                    
-                    <form id="tdee-form" class="calc-form">
-                        <div class="input-group">
-                            <label for="tdee-bmr">BMR (Calories)</label>
-                            <input type="number" id="tdee-bmr" placeholder="Calculated from BMR tab" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="tdee-activity">Activity Level</label>
-                            <select id="tdee-activity" class="premium-select">
-                                <option value="1.2">Sedentary (Office job)</option>
-                                <option value="1.375">Lightly Active (1-3 days/week)</option>
-                                <option value="1.55">Moderately Active (3-5 days/week)</option>
-                                <option value="1.725">Very Active (6-7 days/week)</option>
-                                <option value="1.9">Extra Active (Physical job)</option>
-                            </select>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="calculate-btn">
-                                Calculate TDEE
-                            </button>
-                            <button type="reset" class="reset-btn">Reset</button>
-                        </div>
-                    </form>
+                            <div class="result-box" style="animation-delay: 0.2s">
+                                <span class="box-label">Ideal Wt.</span>
+                                <span class="box-value" id="res-ibw">--</span>
+                                <span class="box-unit">kg</span>
+                            </div>
 
-                    <div id="tdee-result" class="result-container hidden">
-                        <div class="result-card">
-                            <span class="result-label">Your Total Daily Energy Expenditure</span>
-                            <div class="circle-display">
-                                <div class="circle-content">
-                                    <span class="result-value" id="tdee-value">--</span>
-                                    <span class="unit">kcal/day</span>
-                                </div>
+                            <div class="result-box" style="animation-delay: 0.3s">
+                                <span class="box-label">WHR Risk</span>
+                                <span class="box-value" id="res-whr">--</span>
+                                <span class="box-status" id="res-whr-status">Low Risk</span>
                             </div>
-                        </div>
-                        <div class="info-note">
-                            <i data-lucide="info"></i>
-                            <p>This is the amount of calories you need to maintain your current weight.</p>
-                        </div>
-                        <button class="download-pdf-btn" data-type="TDEE">
-                            <i data-lucide="download"></i>
-                            Download Detailed PDF Report
-                        </button>
-                    </div>
-                </div>
-                <!-- Ideal Weight Calculator -->
-                <div id="tab-ibw" class="tab-content">
-                    <div class="calculator-header">
-                        <h2>Ideal Body Weight</h2>
-                        <p>Calculate your healthy weight based on your height and gender.</p>
-                    </div>
-                    
-                    <form id="ibw-form" class="calc-form">
-                        <div class="radio-group">
-                            <label>Gender:</label>
-                            <div class="radio-options">
-                                <label><input type="radio" name="ibw-gender" value="male" checked> <span>Man</span></label>
-                                <label><input type="radio" name="ibw-gender" value="female"> <span>Woman</span></label>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label for="ibw-height">Height (cm)</label>
-                            <input type="number" id="ibw-height" placeholder="e.g. 175" step="0.1" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="calculate-btn">
-                                Calculate Ideal Weight
-                            </button>
-                            <button type="reset" class="reset-btn">Reset</button>
-                        </div>
-                    </form>
 
-                    <div id="ibw-result" class="result-container hidden">
-                        <div class="result-card">
-                            <span class="result-label">Your Ideal Weight (kg)</span>
-                            <div class="circle-display">
-                                <div class="circle-content">
-                                    <span class="result-value" id="ibw-value">--</span>
-                                </div>
+                            <div class="result-box" style="animation-delay: 0.4s">
+                                <span class="box-label">Resting BMR</span>
+                                <span class="box-value" id="res-bmr">--</span>
+                                <span class="box-unit">kcal/day</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Body Fat % Calculator -->
-                <div id="tab-bfp" class="tab-content">
-                    <div class="calculator-header">
-                        <h2>Body Fat Percentage</h2>
-                        <p>U.S. Navy Method using body measurements.</p>
-                    </div>
-                    
-                    <form id="bfp-form" class="calc-form">
-                        <div class="radio-group">
-                            <label>Gender:</label>
-                            <div class="radio-options">
-                                <label><input type="radio" name="bfp-gender" value="male" checked> <span>Man</span></label>
-                                <label><input type="radio" name="bfp-gender" value="female"> <span>Woman</span></label>
+                            <div class="result-box highlighted" style="animation-delay: 0.5s">
+                                <span class="box-label">MAINTENANCE TDEE</span>
+                                <span class="box-value" id="res-calories">--</span>
+                                <span class="box-unit">kcal/day</span>
                             </div>
-                        </div>
-                        <div class="input-grid">
-                            <div class="input-group">
-                                <label for="bfp-height">Height (cm)</label>
-                                <input type="number" id="bfp-height" placeholder="cm" required>
-                            </div>
-                            <div class="input-group">
-                                <label for="bfp-neck">Neck (cm)</label>
-                                <input type="number" id="bfp-neck" placeholder="cm" required>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label for="bfp-waist">Waist (cm)</label>
-                            <input type="number" id="bfp-waist" placeholder="cm" required>
-                        </div>
-                        <div id="bfp-hip-container" class="input-group hidden">
-                            <label for="bfp-hip">Hip (cm)</label>
-                            <input type="number" id="bfp-hip" placeholder="cm">
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="calculate-btn">
-                                Calculate Body Fat
-                            </button>
-                            <button type="reset" class="reset-btn">Reset</button>
-                        </div>
-                    </form>
 
-                    <div id="bfp-result" class="result-container hidden">
-                        <div class="result-card">
-                            <span class="result-label">Your Body Fat %</span>
-                            <div class="circle-display">
-                                <div class="circle-content">
-                                    <span class="result-value" id="bfp-value">--</span>
-                                </div>
+                            <div class="result-box highlighted-alt" style="animation-delay: 0.6s">
+                                <span class="box-label">TARGET INTAKE</span>
+                                <span class="box-value" id="res-rdi">--</span>
+                                <span class="box-unit">kcal/day</span>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- WHR Calculator -->
-                <div id="tab-whr" class="tab-content">
-                    <div class="calculator-header">
-                        <h2>Waist-to-Hip Ratio</h2>
-                        <p>Compare your waist circumference to your hip circumference.</p>
-                    </div>
-                    
-                    <form id="whr-form" class="calc-form">
-                        <div class="input-grid">
-                            <div class="input-group">
-                                <label for="whr-waist">Waist (cm)</label>
-                                <input type="number" id="whr-waist" placeholder="cm" required>
-                            </div>
-                            <div class="input-group">
-                                <label for="whr-hip">Hip (cm)</label>
-                                <input type="number" id="whr-hip" placeholder="cm" required>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="calculate-btn">
-                                Calculate WHR
-                            </button>
-                            <button type="reset" class="reset-btn">Reset</button>
-                        </div>
-                    </form>
-
-                    <div id="whr-result" class="result-container hidden">
-                        <div class="result-card">
-                            <span class="result-label">Your WHR</span>
-                            <div class="circle-display">
-                                <div class="circle-content">
-                                    <span class="result-value" id="whr-value">--</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button id="master-download-pdf" class="master-download-btn pulse-anim">
+                        <i data-lucide="file-text"></i>
+                        Download Advanced Health Report
+                    </button>
                 </div>
             </div>
         </section>
