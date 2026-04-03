@@ -14,7 +14,7 @@
     <!-- PDF Export Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
     <div class="background-blobs">
@@ -26,8 +26,7 @@
     <main class="app-container">
         <header class="header">
             <div class="logo">
-                <i data-lucide="activity" class="logo-icon"></i>
-                <h1>My<span>Prakrit</span></h1>
+                <img src="assets/Prakriti - logo.png" alt="MyPrakrit Logo" class="logo-img">
             </div>
             <p class="subtitle">Your ultimate health companion</p>
         </header>
@@ -95,18 +94,55 @@
                     <!-- Section 3: Lifestyle & Goals -->
                     <div class="form-section">
                         <h3 class="section-title"><i data-lucide="activity"></i> Metabolic Factors</h3>
+                        
+                        <div class="input-group">
+                            <label>ACTIVITY LEVEL</label>
+                            <div class="activity-grid">
+                                <label class="activity-label">
+                                    <input type="radio" name="physical-activity" value="1.2" checked>
+                                    <div class="activity-card">
+                                        <div class="activity-title">Sedentary</div>
+                                        <div class="activity-desc">Desk job, little/no exercise</div>
+                                    </div>
+                                </label>
+                                <label class="activity-label">
+                                    <input type="radio" name="physical-activity" value="1.375">
+                                    <div class="activity-card">
+                                        <div class="activity-title">Lightly active</div>
+                                        <div class="activity-desc">Light exercise 1-3 days/week</div>
+                                    </div>
+                                </label>
+                                <label class="activity-label">
+                                    <input type="radio" name="physical-activity" value="1.55">
+                                    <div class="activity-card">
+                                        <div class="activity-title">Moderately active</div>
+                                        <div class="activity-desc">Exercise 3-5 days/week</div>
+                                    </div>
+                                </label>
+                                <label class="activity-label">
+                                    <input type="radio" name="physical-activity" value="1.725">
+                                    <div class="activity-card">
+                                        <div class="activity-title">Very active</div>
+                                        <div class="activity-desc">Hard exercise 6-7 days/week</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="input-grid-triple">
                             <div class="input-group">
-                                <label for="physical-activity">Activity Multiplier</label>
-                                <input type="number" id="physical-activity" value="1.2" step="0.01">
+                                <label for="goal">Fitness Goal</label>
+                                <select id="goal" class="styled-select">
+                                    <option value="-500">Weight Loss (0.5kg/week)</option>
+                                    <option value="-1000">Extreme Weight Loss (1kg/week)</option>
+                                    <option value="0" selected>Maintain Weight</option>
+                                    <option value="500">Weight Gain (0.5kg/week)</option>
+                                    <option value="1000">Extreme Weight Gain (1kg/week)</option>
+                                </select>
                             </div>
                             <div class="input-group">
-                                <label for="stress">Stress Index</label>
+                                <label for="stress">Stress Index (Opt.)</label>
                                 <input type="number" id="stress" value="1.0" step="0.01">
-                            </div>
-                            <div class="input-group">
-                                <label for="modification">Calorie Delta</label>
-                                <input type="number" id="modification" value="0" step="10">
                             </div>
                         </div>
                     </div>
@@ -122,50 +158,203 @@
 
                 <div id="master-results" class="results-dashboard hidden">
                     <div id="capture-report-area">
-                        <div class="results-grid fade-in-up">
-                            <!-- Primary Metrics -->
-                            <div class="result-box primary-metric" style="animation-delay: 0.1s">
-                                <span class="box-label">BMI</span>
-                                <div class="gauge-small-wrapper">
-                                    <svg class="gauge-small" viewBox="0 0 100 60">
-                                        <path class="gauge-bg" d="M10,50 A40,40 0 0,1 90,50" />
-                                        <path id="master-bmi-gauge" class="gauge-fill" d="M10,50 A40,40 0 0,1 10,50" />
-                                    </svg>
-                                    <span class="box-value" id="res-bmi">--</span>
-                                </div>
-                                <span class="box-status" id="res-bmi-status">Normal</span>
-                            </div>
-
-                            <div class="result-box" style="animation-delay: 0.2s">
-                                <span class="box-label">Ideal Wt.</span>
-                                <span class="box-value" id="res-ibw">--</span>
-                                <span class="box-unit">kg</span>
-                            </div>
-
-                            <div class="result-box" style="animation-delay: 0.3s">
-                                <span class="box-label">WHR Risk</span>
-                                <span class="box-value" id="res-whr">--</span>
-                                <span class="box-status" id="res-whr-status">Low Risk</span>
-                            </div>
-
-                            <div class="result-box" style="animation-delay: 0.4s">
-                                <span class="box-label">Resting BMR</span>
-                                <span class="box-value" id="res-bmr">--</span>
-                                <span class="box-unit">kcal/day</span>
-                            </div>
-
-                            <div class="result-box highlighted" style="animation-delay: 0.5s">
-                                <span class="box-label">MAINTENANCE TDEE</span>
-                                <span class="box-value" id="res-calories">--</span>
-                                <span class="box-unit">kcal/day</span>
-                            </div>
-
-                            <div class="result-box highlighted-alt" style="animation-delay: 0.6s">
-                                <span class="box-label">TARGET INTAKE</span>
-                                <span class="box-value" id="res-rdi">--</span>
-                                <span class="box-unit">kcal/day</span>
+                        <!-- Header Card -->
+                        <div class="report-header-card fade-in-up">
+                            <span class="report-badge">BODY COMPOSITION REPORT</span>
+                            <h2 id="report-name" class="report-title">Your Body Composition Report</h2>
+                            <p id="report-date" class="report-meta">Generated today</p>
+                            
+                            <div class="report-stats-row">
+                                <div class="stat-pill"><span class="stat-label">Age</span><strong id="rep-age">--</strong></div>
+                                <div class="stat-pill"><span class="stat-label">Gender</span><strong id="rep-gender">--</strong></div>
+                                <div class="stat-pill"><span class="stat-label">Height</span><strong id="rep-height">--</strong></div>
+                                <div class="stat-pill"><span class="stat-label">Weight</span><strong id="rep-weight">--</strong></div>
+                                <div class="stat-pill"><span class="stat-label">Activity</span><strong id="rep-activity">--</strong></div>
                             </div>
                         </div>
+
+                        <!-- Overall Assessment -->
+                        <div class="assessment-banner fade-in-up" style="animation-delay: 0.1s">
+                            <div class="assessment-icon"><i data-lucide="sparkles"></i></div>
+                            <div class="assessment-content">
+                                <div class="assessment-label">OVERALL ASSESSMENT</div>
+                                <h3 id="assessment-title">Analyzing...</h3>
+                                <p id="assessment-desc">Please wait while we review your comprehensive biometrics.</p>
+                            </div>
+                        </div>
+
+                        <!-- Metrics Grid -->
+                        <div class="metrics-grid fade-in-up" style="animation-delay: 0.2s">
+                            
+                            <!-- BMI Card with Gauge -->
+                            <div class="metric-card" id="card-bmi">
+                                <div class="metric-header">
+                                    <div class="metric-icon-row"><i data-lucide="heart-pulse"></i><span class="metric-title">BMI</span></div>
+                                    <span class="metric-subtitle">Body Mass Index</span>
+                                </div>
+                                <!-- SVG Semi-circle Gauge -->
+                                <div class="bmi-gauge-container">
+                                    <svg class="bmi-gauge" viewBox="0 0 200 110">
+                                        <!-- Background segments -->
+                                        <path d="M20,100 A80,80 0 0,1 68,28" fill="none" stroke="#3b82f6" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
+                                        <path d="M68,28 A80,80 0 0,1 132,28" fill="none" stroke="#10b981" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
+                                        <path d="M132,28 A80,80 0 0,1 165,58" fill="none" stroke="#f59e0b" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
+                                        <path d="M165,58 A80,80 0 0,1 180,100" fill="none" stroke="#ef4444" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
+                                        <!-- Needle -->
+                                        <line id="bmi-needle" x1="100" y1="100" x2="100" y2="30" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
+                                        <circle cx="100" cy="100" r="6" fill="#0f172a"/>
+                                        <!-- Labels -->
+                                        <text x="15" y="108" font-size="9" fill="#94a3b8" font-family="Outfit">Under</text>
+                                        <text x="78" y="15" font-size="9" fill="#94a3b8" font-family="Outfit">Normal</text>
+                                        <text x="145" y="50" font-size="9" fill="#94a3b8" font-family="Outfit">Over</text>
+                                        <text x="168" y="108" font-size="9" fill="#94a3b8" font-family="Outfit">Obese</text>
+                                    </svg>
+                                </div>
+                                <div class="metric-value-row">
+                                    <span class="metric-value count-up" id="res-bmi" data-target="0">--</span>
+                                    <span class="metric-unit">kg/m²</span>
+                                </div>
+                                <div class="metric-badge" id="badge-bmi">--</div>
+                                <div class="metric-progress-wrapper">
+                                    <div class="metric-progress" id="prog-bmi" style="width: 0%;"></div>
+                                </div>
+                                <p class="metric-desc" id="desc-bmi">--</p>
+                            </div>
+
+                            <!-- BMR Card -->
+                            <div class="metric-card border-top-blue">
+                                <div class="metric-header">
+                                    <div class="metric-icon-row"><i data-lucide="flame"></i><span class="metric-title">BMR</span></div>
+                                    <span class="metric-subtitle">Basal Metabolic Rate</span>
+                                </div>
+                                <div class="metric-value-row">
+                                    <span class="metric-value text-blue count-up" id="res-bmr" data-target="0">--</span>
+                                    <span class="metric-unit">kcal / day</span>
+                                </div>
+                                <div class="metric-badge badge-blue">Your daily base burn</div>
+                                <div class="metric-progress-wrapper">
+                                    <div class="metric-progress progress-blue" style="width: 60%;"></div>
+                                </div>
+                                <p class="metric-desc" id="desc-bmr">Your body burns this amount just keeping you alive — heart, lungs, organs. This is your metabolic floor.</p>
+                            </div>
+
+                            <!-- TDEE Card -->
+                            <div class="metric-card border-top-blue">
+                                <div class="metric-header">
+                                    <div class="metric-icon-row"><i data-lucide="zap"></i><span class="metric-title">TDEE</span></div>
+                                    <span class="metric-subtitle">Total Daily Energy Expenditure</span>
+                                </div>
+                                <div class="metric-value-row">
+                                    <span class="metric-value text-blue count-up" id="res-tdee" data-target="0">--</span>
+                                    <span class="metric-unit">kcal / day</span>
+                                </div>
+                                <div class="metric-badge badge-blue">Your total calorie need</div>
+                                <div class="metric-progress-wrapper">
+                                    <div class="metric-progress progress-blue" style="width: 80%;"></div>
+                                </div>
+                                <p class="metric-desc" id="desc-tdee">With your activity level, your body needs this daily. Below this = weight loss. Above = weight gain.</p>
+                            </div>
+
+                            <!-- Ideal Weight Card -->
+                            <div class="metric-card border-top-orange" id="card-ibw">
+                                <div class="metric-header">
+                                    <div class="metric-icon-row"><i data-lucide="scale"></i><span class="metric-title">IDEAL WEIGHT</span></div>
+                                    <span class="metric-subtitle">Ideal Body Weight</span>
+                                </div>
+                                <div class="metric-value-row">
+                                    <span class="metric-value text-orange count-up" id="res-ibw" data-target="0">--</span>
+                                    <span class="metric-unit">kg</span>
+                                </div>
+                                <div class="metric-badge badge-orange" id="badge-ibw">--</div>
+                                <div class="metric-progress-wrapper">
+                                    <div class="metric-progress progress-orange" id="prog-ibw" style="width: 50%;"></div>
+                                </div>
+                                <p class="metric-desc" id="desc-ibw">--</p>
+                            </div>
+
+                            <!-- WHR Card -->
+                            <div class="metric-card" id="card-whr">
+                                <div class="metric-header">
+                                    <div class="metric-icon-row"><i data-lucide="ratio"></i><span class="metric-title">WHR</span></div>
+                                    <span class="metric-subtitle">Waist to Hip Ratio</span>
+                                </div>
+                                <div class="metric-value-row">
+                                    <span class="metric-value count-up" id="res-whr" data-target="0">--</span>
+                                    <span class="metric-unit">ratio</span>
+                                </div>
+                                <div class="metric-badge" id="badge-whr">--</div>
+                                <div class="metric-progress-wrapper">
+                                    <div class="metric-progress" id="prog-whr" style="width: 0%;"></div>
+                                </div>
+                                <p class="metric-desc" id="desc-whr">--</p>
+                            </div>
+
+                            <!-- Body Fat Card -->
+                            <div class="metric-card" id="card-bfp">
+                                <div class="metric-header">
+                                    <div class="metric-icon-row"><i data-lucide="percent"></i><span class="metric-title">BODY FAT</span></div>
+                                    <span class="metric-subtitle">Body Fat Percentage</span>
+                                </div>
+                                <div class="metric-value-row">
+                                    <span class="metric-value count-up" id="res-bfp" data-target="0">--</span>
+                                    <span class="metric-unit">%</span>
+                                </div>
+                                <div class="metric-badge" id="badge-bfp">--</div>
+                                <div class="metric-progress-wrapper">
+                                    <div class="metric-progress" id="prog-bfp" style="width: 0%;"></div>
+                                </div>
+                                <p class="metric-desc" id="desc-bfp">--</p>
+                            </div>
+
+                        </div>
+
+                        <!-- Calorie Breakdown Section -->
+                        <div class="calorie-breakdown fade-in-up" style="animation-delay: 0.3s">
+                            <div class="breakdown-chart-area">
+                                <canvas id="calorie-donut" width="180" height="180"></canvas>
+                                <div class="donut-center-label">
+                                    <span class="donut-value" id="donut-total">--</span>
+                                    <span class="donut-label">kcal/day</span>
+                                </div>
+                            </div>
+                            <div class="breakdown-legend">
+                                <h4 class="breakdown-title"><i data-lucide="pie-chart"></i> Calorie Breakdown</h4>
+                                <div class="legend-item">
+                                    <span class="legend-dot" style="background:#0ea5e9;"></span>
+                                    <div class="legend-text">
+                                        <strong>Basal Metabolism (BMR)</strong>
+                                        <span id="legend-bmr">-- kcal</span>
+                                    </div>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot" style="background:#10b981;"></span>
+                                    <div class="legend-text">
+                                        <strong>Activity Calories</strong>
+                                        <span id="legend-active">-- kcal</span>
+                                    </div>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot" id="legend-goal-dot" style="background:#f59e0b;"></span>
+                                    <div class="legend-text">
+                                        <strong id="legend-goal-label">Goal Adjustment</strong>
+                                        <span id="legend-goal">-- kcal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Full-width Target Card -->
+                        <div class="target-card fade-in-up" style="animation-delay: 0.35s">
+                            <div class="target-left">
+                                <i data-lucide="target"></i>
+                                <div>
+                                    <div class="target-label">YOUR DAILY TARGET</div>
+                                    <div class="target-main-value"><span id="res-target" class="count-up" data-target="0">--</span> <small>kcal/day</small></div>
+                                </div>
+                            </div>
+                            <p class="target-advice" id="target-advice">Adjust your caloric intake to match this target for optimal results.</p>
+                        </div>
+
                     </div>
 
                     <button id="master-download-pdf" class="master-download-btn pulse-anim">
