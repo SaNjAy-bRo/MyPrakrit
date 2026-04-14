@@ -3,504 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitCalc | Premium Health & Fitness Calculators</title>
-    <meta name="description" content="Calculate your BMI, BMR, TDEE, Body Fat %, and more with our premium fitness calculator tool.">
-    <!-- Google Fonts: Outfit for a modern, premium look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons (rendered via CDN) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- PDF Export Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="styles.css?v=10">
+    <title>Health & Wellness Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
     <div class="background-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
     </div>
 
-    <main class="app-container">
-        <header class="header">
-            <div class="logo">
-                <img src="assets/Prakriti - logo.png" alt="MyPrakrit Logo" class="logo-img">
-            </div>
-            <p class="subtitle">Your ultimate health companion</p>
-            
-            <div style="margin-top: 15px;">
-                <a href="lqs-assessment.html" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(14, 165, 233, 0.1); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 10px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
-                    <i data-lucide="clipboard-list" style="width: 18px; height: 18px;"></i> Take Life Quality Assessment
+    <div class="app-container home-container">
+        <header class="header" style="text-align: center; margin-bottom: 1rem;">
+            <div class="logo" style="margin-bottom: 1.5rem;">
+                <a href="index.html">
+                    <img src="assets/Prakriti - logo.png" alt="MyPrakrit Logo" class="logo-img" style="height: 140px; width: auto; object-fit: contain;">
                 </a>
             </div>
+            <h1 class="main-heading" style="font-size: 3rem; font-weight: 800; color: var(--secondary); margin-bottom: 0.5rem; line-height: 1.2;">Your Personal Wellness Hub</h1>
+            <p class="subtitle" style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Complete your personalized assessments and explore our latest health articles to optimize your well-being.</p>
         </header>
 
-
-
-        <section class="calculator-card glass overflow-visible">
-            <div id="calculator-content" class="fade-in">
-                <form id="master-calculator-form" class="master-form">
-                    <!-- Section 1: Personal Details -->
-                    <div class="form-section">
-                        <h3 class="section-title"><i data-lucide="user-circle"></i> Personal Intelligence</h3>
-                        <div class="input-grid-triple">
-                            <div class="input-group">
-                                <label for="user-name">Full Name</label>
-                                <input type="text" id="user-name" placeholder="Enter Full Name" required>
-                            </div>
-                            <div class="input-group">
-                                <label>Gender Selection</label>
-                                <div class="premium-radio-group">
-                                    <label class="radio-label">
-                                        <input type="radio" name="gender" value="male" checked>
-                                        <span class="radio-custom">Male</span>
-                                    </label>
-                                    <label class="radio-label">
-                                        <input type="radio" name="gender" value="female">
-                                        <span class="radio-custom">Female</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label for="age">Current Age</label>
-                                <input type="number" id="age" placeholder="Age" required>
-                            </div>
-                        </div>
+        <!-- Calculators Section -->
+        <section class="calculators-section">
+            <h2 class="section-title"><i class="fa-solid fa-calculator"></i> Your Assessments</h2>
+            <div class="cards-grid">
+                 <a href="health-calculator.html" class="nav-card">
+                    <div class="nav-card-icon bg-primary-light">
+                        <i class="fa-solid fa-heart-pulse text-primary"></i>
                     </div>
-
-                    <!-- Section 2: Precise Measurements -->
-                    <div class="form-section">
-                        <h3 class="section-title"><i data-lucide="layers"></i> Body Composition</h3>
-                        <div class="input-grid-triple">
-                            <div class="input-group">
-                                <label for="weight">Weight (kg)</label>
-                                <input type="number" id="weight" placeholder="0.0" step="0.1" required>
-                            </div>
-                            <div class="input-group">
-                                <label for="height">Height (cm)</label>
-                                <input type="number" id="height" placeholder="0.0" step="0.1" required>
-                            </div>
-                            <div class="input-group">
-                                <label for="neck">Neck Size (cm)</label>
-                                <input type="number" id="neck" placeholder="0.0" step="0.1">
-                            </div>
-                            <div class="input-group">
-                                <label for="waist">Waist Line (cm)</label>
-                                <input type="number" id="waist" placeholder="0.0" step="0.1">
-                            </div>
-                            <div class="input-group">
-                                <label for="hip">Hip Width (cm)</label>
-                                <input type="number" id="hip" placeholder="0.0" step="0.1">
-                            </div>
-                            <div class="input-group">
-                                <label for="thigh">Thigh Girth (cm)</label>
-                                <input type="number" id="thigh" placeholder="0.0" step="0.1">
-                            </div>
-                        </div>
+                    <div class="nav-card-content">
+                        <h3>Personal Health Calculator</h3>
+                        <p>Calculate your BMI, daily calorie needs, and get personalized health metrics in a beautifully designed report.</p>
                     </div>
-
-                    <!-- Section 3: Lifestyle & Goals -->
-                    <div class="form-section">
-                        <h3 class="section-title"><i data-lucide="activity"></i> Metabolic Factors</h3>
-                        
-                        <div class="input-group">
-                            <label>ACTIVITY LEVEL</label>
-                            <div class="activity-grid">
-                                <label class="activity-label">
-                                    <input type="radio" name="physical-activity" value="1.2" checked>
-                                    <div class="activity-card">
-                                        <div class="activity-title">Sedentary</div>
-                                        <div class="activity-desc">Desk job, little/no exercise</div>
-                                    </div>
-                                </label>
-                                <label class="activity-label">
-                                    <input type="radio" name="physical-activity" value="1.375">
-                                    <div class="activity-card">
-                                        <div class="activity-title">Lightly active</div>
-                                        <div class="activity-desc">Light exercise 1-3 days/week</div>
-                                    </div>
-                                </label>
-                                <label class="activity-label">
-                                    <input type="radio" name="physical-activity" value="1.55">
-                                    <div class="activity-card">
-                                        <div class="activity-title">Moderately active</div>
-                                        <div class="activity-desc">Exercise 3-5 days/week</div>
-                                    </div>
-                                </label>
-                                <label class="activity-label">
-                                    <input type="radio" name="physical-activity" value="1.725">
-                                    <div class="activity-card">
-                                        <div class="activity-title">Very active</div>
-                                        <div class="activity-desc">Hard exercise 6-7 days/week</div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="input-grid-triple">
-                            <div class="input-group">
-                                <label for="goal">Fitness Goal</label>
-                                <select id="goal" class="styled-select">
-                                    <option value="-500">Weight Loss (0.5kg/week)</option>
-                                    <option value="-1000">Extreme Weight Loss (1kg/week)</option>
-                                    <option value="0" selected>Maintain Weight</option>
-                                    <option value="500">Weight Gain (0.5kg/week)</option>
-                                    <option value="1000">Extreme Weight Gain (1kg/week)</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label for="stress">Stress Index (Opt.)</label>
-                                <input type="number" id="stress" value="1.0" step="0.01">
-                            </div>
-                        </div>
+                    <div class="nav-card-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
                     </div>
-
-                    <div class="form-actions-master">
-                        <button type="submit" class="master-calculate-btn">
-                            <i data-lucide="sparkles"></i>
-                            Generate Health Profile
-                        </button>
-                        <button type="reset" class="master-reset-btn">Clear Form</button>
+                 </a>
+                 <a href="lqs-assessment.html" class="nav-card">
+                    <div class="nav-card-icon bg-accent-light">
+                        <i class="fa-solid fa-leaf text-accent"></i>
                     </div>
-                </form>
-
-                <div id="master-results" class="results-dashboard hidden">
-                    <div id="capture-report-area">
-                        <!-- Header Card -->
-                        <div class="report-header-card fade-in-up">
-                            <span class="report-badge">BODY COMPOSITION REPORT</span>
-                            <h2 id="report-name" class="report-title">Your Body Composition Report</h2>
-                            <p id="report-date" class="report-meta">Generated today</p>
-                            
-                            <div class="report-stats-row">
-                                <div class="stat-pill"><span class="stat-label">Age</span><strong id="rep-age">--</strong></div>
-                                <div class="stat-pill"><span class="stat-label">Gender</span><strong id="rep-gender">--</strong></div>
-                                <div class="stat-pill"><span class="stat-label">Height</span><strong id="rep-height">--</strong></div>
-                                <div class="stat-pill"><span class="stat-label">Weight</span><strong id="rep-weight">--</strong></div>
-                                <div class="stat-pill"><span class="stat-label">Activity</span><strong id="rep-activity">--</strong></div>
-                            </div>
-                        </div>
-
-                        <!-- Overall Assessment -->
-                        <div class="assessment-banner fade-in-up" style="animation-delay: 0.1s">
-                            <div class="assessment-icon"><i data-lucide="sparkles"></i></div>
-                            <div class="assessment-content">
-                                <div class="assessment-label">OVERALL ASSESSMENT</div>
-                                <h3 id="assessment-title">Analyzing...</h3>
-                                <p id="assessment-desc">Please wait while we review your comprehensive biometrics.</p>
-                            </div>
-                        </div>
-
-                        <!-- Metrics Grid -->
-                        <div class="metrics-grid fade-in-up" style="animation-delay: 0.2s">
-                            
-                            <!-- BMI Card with Gauge -->
-                            <div class="metric-card" id="card-bmi">
-                                <div class="metric-header">
-                                    <div class="metric-icon-row"><i data-lucide="heart-pulse"></i><span class="metric-title">BMI</span></div>
-                                    <span class="metric-subtitle">Body Mass Index</span>
-                                </div>
-                                <!-- SVG Semi-circle Gauge -->
-                                <div class="bmi-gauge-container">
-                                    <svg class="bmi-gauge" viewBox="0 0 200 110">
-                                        <!-- Background segments -->
-                                        <path d="M20,100 A80,80 0 0,1 68,28" fill="none" stroke="#3b82f6" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
-                                        <path d="M68,28 A80,80 0 0,1 132,28" fill="none" stroke="#10b981" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
-                                        <path d="M132,28 A80,80 0 0,1 165,58" fill="none" stroke="#f59e0b" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
-                                        <path d="M165,58 A80,80 0 0,1 180,100" fill="none" stroke="#ef4444" stroke-width="14" stroke-linecap="round" opacity="0.2"/>
-                                        <!-- Needle -->
-                                        <line id="bmi-needle" x1="100" y1="100" x2="100" y2="30" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
-                                        <circle cx="100" cy="100" r="6" fill="#0f172a"/>
-                                        <!-- Labels -->
-                                        <text x="15" y="108" font-size="9" fill="#94a3b8" font-family="Outfit">Under</text>
-                                        <text x="78" y="15" font-size="9" fill="#94a3b8" font-family="Outfit">Normal</text>
-                                        <text x="145" y="50" font-size="9" fill="#94a3b8" font-family="Outfit">Over</text>
-                                        <text x="168" y="108" font-size="9" fill="#94a3b8" font-family="Outfit">Obese</text>
-                                    </svg>
-                                </div>
-                                <div class="metric-value-row">
-                                    <span class="metric-value count-up" id="res-bmi" data-target="0">--</span>
-                                    <span class="metric-unit">kg/m²</span>
-                                </div>
-                                <div class="metric-badge" id="badge-bmi">--</div>
-                                <div class="metric-progress-wrapper">
-                                    <div class="metric-progress" id="prog-bmi" style="width: 0%;"></div>
-                                </div>
-                                <p class="metric-desc" id="desc-bmi">--</p>
-                            </div>
-
-                            <!-- BMR Card -->
-                            <div class="metric-card border-top-blue">
-                                <div class="metric-header">
-                                    <div class="metric-icon-row"><i data-lucide="flame"></i><span class="metric-title">BMR</span></div>
-                                    <span class="metric-subtitle">Basal Metabolic Rate</span>
-                                </div>
-                                <div class="metric-value-row">
-                                    <span class="metric-value text-blue count-up" id="res-bmr" data-target="0">--</span>
-                                    <span class="metric-unit">kcal / day</span>
-                                </div>
-                                <div class="metric-badge badge-blue">Your daily base burn</div>
-                                <div class="metric-progress-wrapper">
-                                    <div class="metric-progress progress-blue" style="width: 60%;"></div>
-                                </div>
-                                <p class="metric-desc" id="desc-bmr">Your body burns this amount just keeping you alive — heart, lungs, organs. This is your metabolic floor.</p>
-                            </div>
-
-                            <!-- TDEE Card -->
-                            <div class="metric-card border-top-blue">
-                                <div class="metric-header">
-                                    <div class="metric-icon-row"><i data-lucide="zap"></i><span class="metric-title">TDEE</span></div>
-                                    <span class="metric-subtitle">Total Daily Energy Expenditure</span>
-                                </div>
-                                <div class="metric-value-row">
-                                    <span class="metric-value text-blue count-up" id="res-tdee" data-target="0">--</span>
-                                    <span class="metric-unit">kcal / day</span>
-                                </div>
-                                <div class="metric-badge badge-blue">Your total calorie need</div>
-                                <div class="metric-progress-wrapper">
-                                    <div class="metric-progress progress-blue" style="width: 80%;"></div>
-                                </div>
-                                <p class="metric-desc" id="desc-tdee">With your activity level, your body needs this daily. Below this = weight loss. Above = weight gain.</p>
-                            </div>
-
-                            <!-- Ideal Weight Card -->
-                            <div class="metric-card border-top-orange" id="card-ibw">
-                                <div class="metric-header">
-                                    <div class="metric-icon-row"><i data-lucide="scale"></i><span class="metric-title">IDEAL WEIGHT</span></div>
-                                    <span class="metric-subtitle">Ideal Body Weight</span>
-                                </div>
-                                <div class="metric-value-row">
-                                    <span class="metric-value text-orange count-up" id="res-ibw" data-target="0">--</span>
-                                    <span class="metric-unit">kg</span>
-                                </div>
-                                <div class="metric-badge badge-orange" id="badge-ibw">--</div>
-                                <div class="metric-progress-wrapper">
-                                    <div class="metric-progress progress-orange" id="prog-ibw" style="width: 50%;"></div>
-                                </div>
-                                <p class="metric-desc" id="desc-ibw">--</p>
-                            </div>
-
-                            <!-- WHR Card -->
-                            <div class="metric-card" id="card-whr">
-                                <div class="metric-header">
-                                    <div class="metric-icon-row"><i data-lucide="ratio"></i><span class="metric-title">WHR</span></div>
-                                    <span class="metric-subtitle">Waist to Hip Ratio</span>
-                                </div>
-                                <div class="metric-value-row">
-                                    <span class="metric-value count-up" id="res-whr" data-target="0">--</span>
-                                    <span class="metric-unit">ratio</span>
-                                </div>
-                                <div class="metric-badge" id="badge-whr">--</div>
-                                <div class="metric-progress-wrapper">
-                                    <div class="metric-progress" id="prog-whr" style="width: 0%;"></div>
-                                </div>
-                                <p class="metric-desc" id="desc-whr">--</p>
-                            </div>
-
-                            <!-- Body Fat Card -->
-                            <div class="metric-card" id="card-bfp">
-                                <div class="metric-header">
-                                    <div class="metric-icon-row"><i data-lucide="percent"></i><span class="metric-title">BODY FAT</span></div>
-                                    <span class="metric-subtitle">Body Fat Percentage</span>
-                                </div>
-                                <div class="metric-value-row">
-                                    <span class="metric-value count-up" id="res-bfp" data-target="0">--</span>
-                                    <span class="metric-unit">%</span>
-                                </div>
-                                <div class="metric-badge" id="badge-bfp">--</div>
-                                <div class="metric-progress-wrapper">
-                                    <div class="metric-progress" id="prog-bfp" style="width: 0%;"></div>
-                                </div>
-                                <p class="metric-desc" id="desc-bfp">--</p>
-                            </div>
-
-                            <!-- Thigh Girth Card -->
-                            <div class="metric-card" id="card-thigh">
-                                <div class="metric-header">
-                                    <div class="metric-icon-row"><i data-lucide="dumbbell"></i><span class="metric-title">THIGH PROFILE</span></div>
-                                    <span class="metric-subtitle">Thigh-to-Waist Ratio</span>
-                                </div>
-                                <div class="metric-value-row">
-                                    <span class="metric-value count-up" id="res-thigh" data-target="0">--</span>
-                                    <span class="metric-unit">ratio</span>
-                                </div>
-                                <div class="metric-badge" id="badge-thigh">--</div>
-                                <div class="metric-progress-wrapper">
-                                    <div class="metric-progress" id="prog-thigh" style="width: 0%;"></div>
-                                </div>
-                                <p class="metric-desc" id="desc-thigh">--</p>
-                            </div>
-
-                        </div>
-
-                        <!-- Calorie Breakdown Section -->
-                        <div class="calorie-breakdown fade-in-up" style="animation-delay: 0.3s">
-                            <div class="breakdown-chart-area">
-                                <canvas id="calorie-donut" width="180" height="180"></canvas>
-                                <div class="donut-center-label">
-                                    <span class="donut-value" id="donut-total">--</span>
-                                    <span class="donut-label">kcal/day</span>
-                                </div>
-                            </div>
-                            <div class="breakdown-legend">
-                                <h4 class="breakdown-title"><i data-lucide="pie-chart"></i> Calorie Breakdown</h4>
-                                <div class="legend-item">
-                                    <span class="legend-dot" style="background:#0ea5e9;"></span>
-                                    <div class="legend-text">
-                                        <strong>Basal Metabolism (BMR)</strong>
-                                        <span id="legend-bmr">-- kcal</span>
-                                    </div>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-dot" style="background:#10b981;"></span>
-                                    <div class="legend-text">
-                                        <strong>Activity Calories</strong>
-                                        <span id="legend-active">-- kcal</span>
-                                    </div>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-dot" id="legend-goal-dot" style="background:#f59e0b;"></span>
-                                    <div class="legend-text">
-                                        <strong id="legend-goal-label">Goal Adjustment</strong>
-                                        <span id="legend-goal">-- kcal</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Full-width Target Card -->
-                        <div class="target-card fade-in-up" style="animation-delay: 0.35s">
-                            <div class="target-left">
-                                <i data-lucide="target"></i>
-                                <div>
-                                    <div class="target-label">YOUR DAILY TARGET</div>
-                                    <div class="target-main-value"><span id="res-target" class="count-up" data-target="0">--</span> <small>kcal/day</small></div>
-                                </div>
-                            </div>
-                            <p class="target-advice" id="target-advice">Adjust your caloric intake to match this target for optimal results.</p>
-                        </div>
-
+                    <div class="nav-card-content">
+                        <h3>Life Quality Assessment</h3>
+                        <p>Evaluate your lifestyle, mental well-being, and get a comprehensive life quality score to improve your daily habits.</p>
                     </div>
-
-                    <button id="master-download-pdf" class="master-download-btn pulse-anim">
-                        <i data-lucide="file-text"></i>
-                        Download Advanced Health Report
-                    </button>
-                </div>
+                    <div class="nav-card-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                 </a>
             </div>
         </section>
 
-        <section class="info-hub fade-in">
-            <div id="info-bmi" class="info-tab-content active">
-                <div class="faq-section">
-                    <h3>BMI Information & FAQs</h3>
-                    <div class="faq-item">
-                        <div class="faq-question">What is BMI?</div>
-                        <div class="faq-answer">Body Mass Index (BMI) is a person's weight in kilograms divided by the square of height in meters. A high BMI can indicate high body fatness.</div>
+        <!-- Blogs Section -->
+        <section class="blogs-section fade-in">
+            <h2 class="section-title"><i class="fa-solid fa-book-open"></i> Latest Health Articles</h2>
+            <div class="blogs-grid">
+                <article class="blog-card">
+                    <div class="blog-image img-placeholder-1"></div>
+                    <div class="blog-content">
+                        <span class="blog-category text-primary">Nutrition</span>
+                        <h3 class="blog-title">The Role of Macronutrients in Daily Energy</h3>
+                        <p class="blog-excerpt">Discover how balancing your proteins, fats, and carbs can stabilize your energy levels throughout the day and keep you focused.</p>
+                        <a href="#" class="read-more">Read Article <i class="fa-solid fa-chevron-right"></i></a>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-question">What are the health risks of a high BMI?</div>
-                        <div class="faq-answer">Maintaining a healthy BMI is important for overall health. A high BMI is associated with an increased risk of chronic diseases such as type 2 diabetes and cardiovascular disease.</div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image img-placeholder-2"></div>
+                    <div class="blog-content">
+                        <span class="blog-category text-accent">Fitness</span>
+                        <h3 class="blog-title">Building a Sustainable Workout Routine</h3>
+                        <p class="blog-excerpt">Tips and strategies to create a workout plan that you actually enjoy, preventing burnout and ensuring long-term success.</p>
+                        <a href="#" class="read-more">Read Article <i class="fa-solid fa-chevron-right"></i></a>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-question">Is BMI accurate for everyone?</div>
-                        <div class="faq-answer">BMI is a screening tool, but it doesn't directly measure body fat. It might overestimate fat in athletes or underestimate it in older adults.</div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image img-placeholder-3">
+                        <!-- We use an image class for background -->
                     </div>
-                </div>
-            </div>
-
-            <div id="info-bmr" class="info-tab-content">
-                <div class="faq-section">
-                    <h3>BMR Information & FAQs</h3>
-                    <div class="faq-item">
-                        <div class="faq-question">What is BMR?</div>
-                        <div class="faq-answer">Basal Metabolic Rate (BMR) represents the amount of energy (calories) your body needs to maintain basic life-sustaining functions, such as breathing and circulation, while at complete rest.</div>
+                    <div class="blog-content">
+                        <span class="blog-category text-green" style="color: #10b981;">Mental Health</span>
+                        <h3 class="blog-title">Mindfulness Techniques for Busy Professionals</h3>
+                        <p class="blog-excerpt">Simple 5-minute practices to reduce stress, improve mental clarity, and elevate your overall quality of life in a fast-paced world.</p>
+                        <a href="#" class="read-more">Read Article <i class="fa-solid fa-chevron-right"></i></a>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-question">Why does BMR change with age?</div>
-                        <div class="faq-answer">As we age, muscle mass usually decreases and body fat increases, which slows down the metabolic rate.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="info-tdee" class="info-tab-content">
-                <div class="faq-section">
-                    <h3>TDEE Information & FAQs</h3>
-                    <div class="faq-item">
-                        <div class="faq-question">What is TDEE?</div>
-                        <div class="faq-answer">Total Daily Energy Expenditure (TDEE) is an estimation of how many calories you burn per day when exercise is taken into account. It is calculated by first figuring out your BMR, then multiplying that value by an activity multiplier.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">Should I eat my TDEE to lose weight?</div>
-                        <div class="faq-answer">To lose weight, you typically need to eat slightly less than your TDEE (a calorie deficit). To gain weight, you eat more (a calorie surplus).</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="info-ibw" class="info-tab-content">
-                <div class="faq-section">
-                    <h3>Ideal Weight Information & FAQs</h3>
-                    <div class="faq-item">
-                        <div class="faq-question">How is Ideal Body Weight (IBW) calculated?</div>
-                        <div class="faq-answer">IBW formulas are used to estimate a healthy weight based on your height and gender. They are often used as a starting point for discussions about health and fitness goals.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="info-bfp" class="info-tab-content">
-                <div class="faq-section">
-                    <h3>Body Fat % Information & FAQs</h3>
-                    <div class="faq-item">
-                        <div class="faq-question">What is the U.S. Navy Method for Body Fat?</div>
-                        <div class="faq-answer">The U.S. Navy Method uses Body circumference measurements to estimate body fat. It is a cost-effective alternative to clinical methods like DEXA scans.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">What is a healthy body fat percentage?</div>
-                        <div class="faq-answer">It varies by age and gender. Generally, 10-20% is considered healthy for men, and 18-28% for women.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="info-whr" class="info-tab-content">
-                <div class="faq-section">
-                    <h3>WHR Information & FAQs</h3>
-                    <div class="faq-item">
-                        <div class="faq-question">Why measure Waist-to-Hip Ratio?</div>
-                        <div class="faq-answer">WHR is a quick measure of fat distribution. Research shows that carrying more weight around the waist (apple-shaped) increases health risks compared to carrying it around the hips (pear-shaped).</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">What is a good WHR?</div>
-                        <div class="faq-answer">For men, a ratio of 0.90 or less is considered safe. For women, a ratio of 0.85 or less is considered safe.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="info-thigh" class="info-tab-content">
-                <div class="faq-section">
-                    <h3>Thigh Metric Information & FAQs</h3>
-                    <div class="faq-item">
-                        <div class="faq-question">What is Thigh-to-Waist Ratio (TWR)?</div>
-                        <div class="faq-answer">TWR compares the circumference of your thigh to your waist. A higher ratio is generally healthier, as it indicates more lower-body muscle mass relative to abdominal fat.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">Why does Thigh Girth matter?</div>
-                        <div class="faq-answer">Clinical studies suggest that a thigh circumference of less than 60cm is associated with an increased risk of cardiovascular and metabolic issues. Maintaining leg muscle is a key component of long-term metabolic health.</div>
-                    </div>
-                </div>
+                </article>
             </div>
         </section>
 
         <footer class="footer">
-            <p>&copy; 2024 myprakrit.in. Precision Health Metrics.</p>
+            <p>&copy; 2026 Health &amp; Wellness Hub. All rights reserved.</p>
         </footer>
-    </main>
-
-    <script src="script.js"></script>
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
+    </div>
 </body>
 </html>
