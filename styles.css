@@ -1,11 +1,12 @@
 :root {
-    --primary: #ff8c00;
-    --primary-glow: rgba(255, 140, 0, 0.4);
-    --secondary: #0f172a;
-    --accent: #0ea5e9;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --bg-main: #f1f5f9;
+    --primary: #006D4E;
+    --primary-glow: rgba(0, 109, 78, 0.15);
+    --secondary: #1e293b;
+    --accent: #006D4E;
+    --accent-light: #E6F7F1;
+    --text-main: #0f172a;
+    --text-muted: #707C8C;
+    --bg-main: #f8fafc;
     --card-bg: #ffffff;
     --input-bg: #f8fafc;
     --border-light: #e2e8f0;
@@ -177,7 +178,6 @@ h1, h2, h3, h4, h5, h6 {
     flex: 3;
     height: 60px;
     background-color: var(--primary);
-    background-image: linear-gradient(135deg, var(--primary), #fb923c);
     border: none;
     border-radius: var(--radius-full);
     color: #ffffff;
@@ -236,11 +236,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Header Card */
 .report-header-card {
-    background-color: #216f4d; /* Theme matching screenshot */
+    background-color: var(--primary); 
     border-radius: 16px;
     padding: 2.5rem;
     color: #ffffff;
-    box-shadow: 0 10px 30px rgba(33, 111, 77, 0.2);
+    box-shadow: 0 10px 30px var(--primary-glow);
     position: relative;
     overflow: hidden;
 }
@@ -304,7 +304,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Assessment Banner */
 .assessment-banner {
-    background-color: #f0fdf4;
+    background-color: var(--accent-light);
     border-radius: 16px;
     padding: 2rem;
     display: flex;
@@ -314,8 +314,8 @@ h1, h2, h3, h4, h5, h6 {
 .assessment-icon {
     width: 60px;
     height: 60px;
-    background-color: #d1fae5;
-    color: #065f46;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: var(--primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -328,17 +328,17 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 1px;
-    color: #065f46;
+    color: var(--primary);
     margin-bottom: 0.5rem;
 }
 .assessment-content h3 {
-    color: #065f46;
+    color: var(--primary);
     font-size: 1.75rem;
     margin: 0 0 0.5rem 0;
     font-family: 'Times New Roman', Times, serif;
 }
 .assessment-content p {
-    color: #064e3b;
+    color: var(--text-main);
     opacity: 0.8;
     margin: 0;
     font-size: 1.05rem;
@@ -362,9 +362,9 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
 }
 
-.border-top-green { border-top: 4px solid #10b981; }
-.border-top-blue { border-top: 4px solid #0ea5e9; }
-.border-top-orange { border-top: 4px solid #f59e0b; }
+.border-top-green { border-top: 4px solid var(--primary); }
+.border-top-blue { border-top: 4px solid #707C8C; }
+.border-top-orange { border-top: 4px solid #1e293b; }
 
 .metric-header {
     display: flex;
@@ -398,9 +398,9 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
-.text-green { color: #065f46; }
-.text-blue { color: #075985; }
-.text-orange { color: #92400e; }
+.text-green { color: var(--primary); }
+.text-blue { color: #5A6A80; }
+.text-orange { color: #1e293b; }
 
 .metric-badge {
     align-self: flex-start;
@@ -410,9 +410,9 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     margin-bottom: 2rem;
 }
-.badge-green { background-color: #d1fae5; color: #065f46; }
-.badge-blue { background-color: #e0f2fe; color: #075985; }
-.badge-orange { background-color: #fef3c7; color: #92400e; }
+.badge-green { background-color: var(--accent-light); color: var(--primary); }
+.badge-blue { background-color: #f1f5f9; color: #5A6A80; }
+.badge-orange { background-color: #e2e8f0; color: #1e293b; }
 
 /* Progress */
 .metric-progress-wrapper {
@@ -492,9 +492,9 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 3px;
     transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.progress-green { background: linear-gradient(90deg, #6ee7b7, #10b981); }
-.progress-blue { background: linear-gradient(90deg, #7dd3fc, #0ea5e9); }
-.progress-orange { background: linear-gradient(90deg, #fcd34d, #f59e0b); }
+.progress-green { background: linear-gradient(90deg, #E6F7F1, var(--primary)); }
+.progress-blue { background: linear-gradient(90deg, #f1f5f9, #707C8C); }
+.progress-orange { background: linear-gradient(90deg, #e2e8f0, #1e293b); }
 
 /* Calorie Breakdown */
 .calorie-breakdown {
@@ -659,11 +659,11 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.9;
 }
 .activity-label input:checked + .activity-card {
-    border-color: #10b981;
-    background-color: #f0fdf4;
+    border-color: var(--primary);
+    background-color: var(--accent-light);
 }
 .activity-label input:checked + .activity-card .activity-title {
-    color: #047857;
+    color: var(--primary);
 }
 
 /* Styled Select */
